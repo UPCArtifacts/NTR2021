@@ -1,0 +1,38 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from FootResultsServiceService WSDL service -->
+
+  <service name="FootResultsService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://uphf.fr"/>
+      <parameter name="wsdlServiceElement" value="FootResultsServiceService"/>
+      <parameter name="schemaQualified" value="http://uphf.fr"/>
+      <parameter name="wsdlServicePort" value="FootResultsService"/>
+      <parameter name="className" value="fr.uphf.FootResultsServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="FootResultsService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="retrieveResult" qname="operNS:retrieveResult" xmlns:operNS="http://uphf.fr" returnQName="retNS:retrieveResultReturn" xmlns:retNS="http://uphf.fr" returnType="rtns:Result" xmlns:rtns="http://uphf.fr" soapAction="" >
+        <parameter qname="pns:team1" xmlns:pns="http://uphf.fr" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:team2" xmlns:pns="http://uphf.fr" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="retrieveResult"/>
+
+      <typeMapping
+        xmlns:ns="http://uphf.fr"
+        qname="ns:Result"
+        type="java:fr.uphf.Result"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
