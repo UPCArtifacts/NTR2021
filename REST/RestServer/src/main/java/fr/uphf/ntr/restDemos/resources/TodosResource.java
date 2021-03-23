@@ -64,7 +64,7 @@ public class TodosResource {
 		List<Todo> todos = new ArrayList<Todo>();
 		todos.addAll(TodoDao.instance.getModel().values());
 		System.out.println(todos);
-		return "<x>Hola</x>";
+		return "<x>Hola<x>";
 	}
 	
 	// retuns the number of todos

@@ -1,4 +1,4 @@
-package fr.uphf.ntr.restDemos;
+package fr.uphf.ntr.restDemos.resources;
 
 import java.util.Date;
 
